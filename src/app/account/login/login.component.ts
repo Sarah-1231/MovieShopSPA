@@ -1,11 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { Errors } from 'src/app/shared/models/errors';
 import { Login } from 'src/app/shared/models/login';
-
 
 @Component({
   selector: 'app-login',
@@ -14,40 +12,37 @@ import { Login } from 'src/app/shared/models/login';
 })
 export class LoginComponent implements OnInit {
 
-  invalidLogin: boolean = false;
-  errors: Errors = { errors: {} };
-
-  isSubmitting = false;
   userLogin: Login = {
-    password: '',
-    email: ''
+    email: '',
+    password: ''
   };
-  constructor(private authService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
-
   }
 
   loginSubmit(form: NgForm) {
+    // capture the email/password from the view
+    // then send the model to Authentication Service
 
-    this.isSubmitting = true;
-    if (form.invalid) {
-      this.isSubmitting = false;
-      return;
-    }
-
-    this.errors = { errors: {} };
-
+    // console.log(form);
+    // console.log('login button clicked!');
+    // console.log(this.userLogin);
     this.authService.login(this.userLogin)
-      .subscribe(
-        data => this.router.navigateByUrl('/'),
-        (err: HttpErrorResponse) => {
-          this.invalidLogin = true;
-          this.isSubmitting = false;
-          console.log(err);
-        }
+      // if token is saved successfully, then redirect to home page
+      // if error then show error message and stay on same page
 
-      )
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.router.navigateByUrl('/');
+          }
+          (err: HttpErrorResponse) => {
+            console.log(err);
+          }
+        })
+
   }
 
 }

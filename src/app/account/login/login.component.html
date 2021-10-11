@@ -1,36 +1,29 @@
+<!-- Use Template-Driven approach -->
+<!-- ngModel directive is the one we use that uses FormControl behind the scenes -->
+<!-- template driven approach will require each hrml control to have name attribute -->
+<!-- ngModel uses banana in the box syntax -->
+<!-- Before using Template-driven or Reactibve forms, import those two modules in app module -->
+<!-- Two way binding Angular's two-way binding syntax is a combination of square brackets and parentheses, [()] -->
+
 <div class="row justify-content-center">
-    <div class="col-md-4 shadow ">
+    <div class="col-md-4 ">
         <h4> Login </h4>
         <hr />
-        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password.</div>
-        <form (ngSubmit)="loginSubmit(loginForm)" #loginForm="ngForm" novalidate>
-
+        <form (ngSubmit)="loginSubmit(loginForm)" #loginForm="ngForm">
+            <div class="text-danger"></div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" name="email" [(ngModel)]="userLogin.email" #email="ngModel"
-                    [ngClass]="{ 'is-invalid': loginForm.submitted && email.invalid }" required email />
+                <label class="control-label"></label>
+                <input class="form-control" name="email" [(ngModel)]="userLogin.email" />
 
-                <div *ngIf="loginForm.submitted && email.invalid" class="invalid-feedback">
-                    <div *ngIf="email.errors?.required">Email is required</div>
-                    <div *ngIf="email.errors?.email">Email must be a valid email address</div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="Password" class="control-label">Password</label>
-                <input class="form-control" name="password" type="password" #password="ngModel"
-                    [(ngModel)]="userLogin.password" required minlength="8" maxlength="100"
-                    [ngClass]="{ 'is-invalid': loginForm.submitted && password.invalid }" />
-
-                <div *ngIf="loginForm.submitted && password.invalid" class="invalid-feedback">
-                    <div *ngIf="password.errors?.required">Password is required</div>
-                    <!-- <div *ngIf="password.errors?.pattern">Password Should have minimum 8 with at least one upper, lower,
-                        number</div> -->
-                </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
-                    Login <i class="fas fa-sign-in-alt"></i>
+                <label class="control-label"></label>
+                <input class="form-control" name="password" [(ngModel)]="userLogin.password" />
+
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Login" class="btn btn-primary">
+                    Login
                 </button>
             </div>
         </form>
