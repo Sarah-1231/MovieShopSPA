@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MovieCard } from '../../models/movieCard';
 
 @Component({
@@ -8,11 +8,17 @@ import { MovieCard } from '../../models/movieCard';
 })
 export class MovieCardComponent implements OnInit {
 
+  @Input() hideButton: boolean = true;
   @Input() movieCard!: MovieCard;
-  
+  @Output() showPurchaseDetails = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  purchases(movieId: number) {
+    this.showPurchaseDetails.emit(movieId);
+  }
 }
+
