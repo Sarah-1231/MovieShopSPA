@@ -17,6 +17,10 @@ import { CreateMovieComponent } from './admin/create-movie/create-movie.componen
 import { CreateCastComponent } from './admin/create-cast/create-cast.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { MovieCardComponent } from './shared/components/movie-card/movie-card.component';
+import { UserModule } from './user/user.module';
+import { AdminModule } from './admin/admin.module';
+import { AccountModule } from './account/account.module';
+import { MoviesModule } from './movies/movies.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { MovieCardComponent } from './shared/components/movie-card/movie-card.co
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule,
+    AdminModule,
+    AccountModule,
+    MoviesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
